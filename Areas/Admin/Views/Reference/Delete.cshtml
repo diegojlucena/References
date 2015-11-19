@@ -1,0 +1,15 @@
+﻿@model MrCMS.Web.Apps.References.Entities.Reference
+@{ Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";}
+@using (Html.BeginForm("Delete", "Reference", FormMethod.Post))
+{
+    <fieldset>
+        <legend>
+            Delete Reference
+            <span class="btn-group display-inline pull-right">
+                <input type="submit" class="btn-danger btn" value="Delete" />
+            </span>
+        </legend>
+        @Html.HiddenFor(item => item.Id)
+        <p>Are you sure you want to delete reference @Model.Title?</p>
+    </fieldset>
+}

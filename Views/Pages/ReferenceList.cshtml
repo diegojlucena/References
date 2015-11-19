@@ -1,0 +1,60 @@
+﻿@using MrCMS.Helpers
+@using MrCMS.Paging
+@using MrCMS.Web.Apps.References.Entities
+@using MrCMS.Web.Apps.References.Pages
+@model ReferenceList
+<h1 class="margin-top-0">@Editable(Model, p => p.Name, false)</h1>
+@Editable(Model, p => p.BodyContent, true)
+@{
+    var pagedList = ViewData["paged-references"] as IPagedList<Reference>;
+    //var searchModel = ViewData["socialevents-search-model"] as SocialEventSearchModel;
+}
+@if (pagedList != null && !pagedList.Any())
+{
+    <div class="alert alert-info">No references available.</div>
+}
+@if (pagedList != null)
+{
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Resource("Reference - Date","Date")
+                </th>
+                <th>
+                    @Resource("Reference - Title","Title")
+                </th>
+                <th>
+                    @Resource("Reference - Subject","Subject")
+                </th>
+                <th>@Resource("View")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var page in pagedList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => page.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => page.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => page.Subject)
+                    </td>
+                    <td>
+                        <a href="@page.UrlPath" target="_blank"><i class="glyphicon glyphicon-search"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+}
+@if (Model.AllowPaging)
+{
+    @Html.PageCurrentPage(pagedList, i => new { Page = i }, PagedListRenderOptions.PageNumbersOnly)
+}

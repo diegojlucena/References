@@ -1,0 +1,12 @@
+﻿@using MrCMS.Helpers
+@model MrCMS.Web.Apps.References.Pages.ReferenceList
+
+<div class="form-group">
+    @Html.LabelFor(model => model.PageSize)
+    @Html.TextBoxFor(model => model.PageSize, new{@class="form-control"})
+    @Html.ValidationMessageFor(model => model.PageSize)
+</div>
+<div class="form-group">
+    @Html.InlineCheckboxFor(model => model.AllowPaging, null, null, "Allow paging?")
+</div>
+

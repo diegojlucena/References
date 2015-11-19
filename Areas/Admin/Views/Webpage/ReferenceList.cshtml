@@ -1,0 +1,70 @@
+﻿@using System.Linq
+@using System.Web.Mvc.Html
+@using MrCMS.Helpers
+@using MrCMS.Web.Apps.References.Entities
+@using MrCMS.Web.Apps.References.Helpers
+@using NHibernate.Criterion
+@model MrCMS.Web.Apps.References.Pages.ReferenceList
+@{
+
+
+    //var category = Request["Category"];
+
+    var query = QueryOver.Of<Reference>()
+                                     .Where(gallery => gallery.ReferenceList == Model)
+                                     .ThenBy(gallery => gallery.CreatedOn)
+                                     .Desc;
+
+    var pagedList = Model.PagedChildrenSiteEntity(pageNum: Request["p"].GetIntValue(1), query: query, pageSize: Model.PageSize);
+
+
+    //var searchModel = ViewData["socialevents-search-model"] as SocialEventSearchModel;
+}
+@if (pagedList != null && pagedList.Any())
+{
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Subject
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in pagedList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Subject)
+                    </td>
+                    <td style="width: 110px">
+                        <div class="btn-group">
+                            @Html.ActionLink("Edit", "Edit", "Reference", new { id = item.Id }, new { @class = "btn btn-default btn-sm", data_toggle = "fb-modal" })
+                            @Html.ActionLink("Delete", "Delete", "Reference", new { id = item.Id }, new { @class = "btn btn-sm btn-danger", data_toggle = "fb-modal" })
+                        </div>
+                    <td />
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model.AllowPaging)
+{
+    @Html.PageCurrentPage(pagedList, i => new { p = i }, PagedListRenderOptions.PageNumbersOnly)
+}
+
+<a href="@Url.Action("Add", "Reference", new { id = Model.Id })" class="btn btn-success" data-toggle="fb-modal">Add Item</a>

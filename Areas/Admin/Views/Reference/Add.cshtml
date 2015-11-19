@@ -1,0 +1,38 @@
+﻿@using System.Web.Mvc.Html
+@model MrCMS.Web.Apps.References.Entities.Reference
+@{ Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";}
+@using (Html.BeginForm("Add", "Reference", new { id = "" }, FormMethod.Post))
+{
+    <fieldset>
+        <legend>
+            Add Reference
+            <span class="btn-group display-inline pull-right">
+                <input type="submit" class="btn-success btn" value="Add" />
+            </span>
+        </legend>
+        @Html.HiddenFor(item => item.ReferenceList.Id)
+        <div class="form-group">
+            @Html.LabelFor(x => x.Title)
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Title)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Subject)
+            @Html.TextAreaFor(x => x.Subject, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Subject)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.UrlPath)
+            @Html.TextBoxFor(x => x.UrlPath, new { @class = "form-control" })
+            <button class="btn btn-success" data-media="select">or Select media...</button>
+            @Html.ValidationMessageFor(x => x.UrlPath)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(x => x.Date)
+            @Html.EditorFor(x => x.Date, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Date)
+        </div>
+    </fieldset>
+}
+
