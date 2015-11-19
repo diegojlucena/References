@@ -7,6 +7,10 @@ namespace MrCMS.Web.Apps.References.Entities
 {
     public class Reference : SiteEntity
     {
+        public Reference()
+        {
+            Date = DateTime.Today;
+        }
         [Required]
         [MaxLength(500)]
         public virtual string Title { get; set; }

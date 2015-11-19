@@ -1,6 +1,10 @@
 ﻿@using System.Web.Mvc.Html
+@using MrCMS.Helpers
 @model MrCMS.Web.Apps.References.Entities.Reference
-@{ Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";
+    Html.IncludeScript("~/Apps/References/Areas/Admin/Content/Scripts/media-selector-button.js");
+}
 @using (Html.BeginForm("Add", "Reference", new { id = "" }, FormMethod.Post))
 {
     <fieldset>
@@ -23,11 +27,10 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(x => x.UrlPath)
-            @Html.TextBoxFor(x => x.UrlPath, new { @class = "form-control" })
-            <button class="btn btn-success" data-media="select">or Select media...</button>
+            @Html.TextBoxFor(x => x.UrlPath, new { @class = "form-control", data_toggle = "input-media-selector" })
             @Html.ValidationMessageFor(x => x.UrlPath)
         </div>
-        
+
         <div class="form-group">
             @Html.LabelFor(x => x.Date)
             @Html.EditorFor(x => x.Date, new { @class = "form-control" })

@@ -20,6 +20,10 @@
 
     //var searchModel = ViewData["socialevents-search-model"] as SocialEventSearchModel;
 }
+<hr />
+
+<a href="@Url.Action("Add", "Reference", new { id = Model.Id })" class="pull-right btn btn-success" data-toggle="fb-modal">Add Item</a>
+<h3>References</h3>
 @if (pagedList != null && pagedList.Any())
 {
     <table class="table table-condensed table-striped">
@@ -62,9 +66,10 @@
     </table>
 }
 
+
 @if (Model.AllowPaging)
 {
     @Html.PageCurrentPage(pagedList, i => new { p = i }, PagedListRenderOptions.PageNumbersOnly)
 }
 
-<a href="@Url.Action("Add", "Reference", new { id = Model.Id })" class="btn btn-success" data-toggle="fb-modal">Add Item</a>
+

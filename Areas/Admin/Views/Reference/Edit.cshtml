@@ -1,9 +1,13 @@
 ﻿@model MrCMS.Web.Apps.References.Entities.Reference
 @using System.Web.Mvc.Html
-@{ Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";}
+@using MrCMS.Helpers
+@{ Layout = "~/Areas/Admin/Views/Shared/_LayoutPopup.cshtml";
+ Html.IncludeScript("~/Apps/References/Areas/Admin/Content/Scripts/media-selector-button.js");
+}
+
 @using (Html.BeginForm("Edit", "Reference", FormMethod.Post))
 {
-     @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Id)
     <fieldset>
         <legend>
             Edit Reference
@@ -24,7 +28,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(x => x.UrlPath)
-            @Html.TextBoxFor(x => x.UrlPath, new { @class = "form-control" })
+            @Html.TextBoxFor(x => x.UrlPath, new { @class = "form-control", data_toggle = "input-media-selector" })
             @Html.ValidationMessageFor(x => x.UrlPath)
         </div>
         <div class="form-group">
