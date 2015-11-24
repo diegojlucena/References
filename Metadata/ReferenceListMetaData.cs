@@ -14,7 +14,7 @@ namespace MrCMS.Web.Apps.References.Metadata
         }
         public override string IconClass
         {
-            get { return "glyphicon glyphicon-list"; }
+            get { return "glyphicon glyphicon-list-alt"; }
         }
 
 

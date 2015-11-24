@@ -12,9 +12,9 @@ namespace MrCMS.Web.Apps.References.Controllers
     {
         private readonly IReferenceService _referenceService;
 
-        public ReferenceController(IReferenceService socialEventService)
+        public ReferenceController(IReferenceService referenceService)
         {
-            _referenceService = socialEventService;
+            _referenceService = referenceService;
         }
 
         public ActionResult Show(ReferenceList page, [IoCModelBinder(typeof(ReferenceModelBinder))]ReferenceSearchModel model)
