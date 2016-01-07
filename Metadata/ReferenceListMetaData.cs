@@ -23,10 +23,10 @@ namespace MrCMS.Web.Apps.References.Metadata
             get { return ChildrenListType.WhiteList; }
         }
 
-        public override bool AutoBlacklist
-        {
-            get { return true; }
-        }
+        //public override bool AutoBlacklist
+        //{
+        //    get { return true; }
+        //}
 
         public override IEnumerable<Type> ChildrenList
         {

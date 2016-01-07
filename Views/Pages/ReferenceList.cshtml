@@ -3,7 +3,7 @@
 @using MrCMS.Web.Apps.References.Entities
 @using MrCMS.Web.Apps.References.Pages
 @model ReferenceList
-<h1 class="margin-top-0">@Editable(Model, p => p.Name, false)</h1>
+@*<h1 class="margin-top-0">@Editable(Model, p => p.Name, false)</h1>*@
 @Editable(Model, p => p.BodyContent, true)
 @{
     var pagedList = ViewData["paged-references"] as IPagedList<Reference>;
@@ -11,7 +11,7 @@
 }
 @if (pagedList != null && !pagedList.Any())
 {
-    <div class="alert alert-info">No references available.</div>
+    <div class="alert alert-info">@Resource("No references available")</div>
 }
 @if (pagedList != null)
 {

@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using MrCMS.Entities.Documents.Web;
+using MrCMS.Web.Apps.Core.Pages;
 
 namespace MrCMS.Web.Apps.References.Pages
 {
-    public class ReferenceList : Webpage
+    public class ReferenceList : TextPage
     {
         [DisplayName("Page Size")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Page size must be a number")]
