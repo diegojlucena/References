@@ -8,5 +8,6 @@ namespace MrCMS.Web.Apps.References.Models
             Page = 1;
         }
         public int Page { get; set; }
+        public string SearchText { get; set; }
     }
 }

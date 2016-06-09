@@ -20,6 +20,7 @@ namespace MrCMS.Web.Apps.References.Controllers
         public ActionResult Show(ReferenceList page, [IoCModelBinder(typeof(ReferenceModelBinder))]ReferenceSearchModel model)
         {
             ViewData["paged-references"] = _referenceService.GetPagedReferences(page,model);
+            ViewData["reference-search-model"] = model;
             return View(page);
         }
     }

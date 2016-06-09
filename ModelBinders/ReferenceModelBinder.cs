@@ -18,9 +18,10 @@ namespace MrCMS.Web.Apps.References.ModelBinders
             int.TryParse(GetValueFromContext(controllerContext, "page"), out page);
 
             return new ReferenceSearchModel
-                       {
-                           Page = page,
-                       };
+            {
+                Page = page,
+                SearchText = GetValueFromContext(controllerContext, "s"),
+            };
         }
     }
 }

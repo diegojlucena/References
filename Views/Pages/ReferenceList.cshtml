@@ -3,12 +3,31 @@
 @using MrCMS.Web.Apps.References.Entities
 @using MrCMS.Web.Apps.References.Pages
 @model ReferenceList
-@*<h1 class="margin-top-0">@Editable(Model, p => p.Name, false)</h1>*@
+<h1 class="margin-top-0">@Editable(Model, p => p.Name, false)</h1>
 @Editable(Model, p => p.BodyContent, true)
 @{
     var pagedList = ViewData["paged-references"] as IPagedList<Reference>;
-    //var searchModel = ViewData["socialevents-search-model"] as SocialEventSearchModel;
+    var searchModel = ViewData["reference-search-model"] as MrCMS.Web.Apps.References.Models.ReferenceSearchModel;
 }
+
+<form class="cogen-navbar-form" role="search" method="GET" action="/@Model.LiveUrlSegment">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label for="s">Buscar</label>
+                <input class="form-control" id="s" name="s" type="text" value="@searchModel.SearchText">
+                
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label class="hidden-xs">&nbsp;</label>
+                <button type="submit" class="btn btn-primary form-control">Busca</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 @if (pagedList != null && !pagedList.Any())
 {
     <div class="alert alert-info">@Resource("No references available")</div>
@@ -19,20 +38,20 @@
         <thead>
             <tr>
                 <th>
-                    @Resource("Reference - Date","Date")
+                    @Resource("Reference - Date", "Date")
                 </th>
                 <th>
-                    @Resource("Reference - Title","Title")
+                    @Resource("Reference - Title", "Title")
                 </th>
                 <th>
-                    @Resource("Reference - Subject","Subject")
+                    @Resource("Reference - Subject", "Subject")
                 </th>
                 <th>@Resource("View")</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var page in pagedList)
-            {
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(m => page.Date)

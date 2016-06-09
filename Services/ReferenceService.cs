@@ -4,6 +4,7 @@ using MrCMS.Web.Apps.References.Entities;
 using MrCMS.Web.Apps.References.Models;
 using MrCMS.Web.Apps.References.Pages;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace MrCMS.Web.Apps.References.Services
 {
@@ -35,6 +36,11 @@ namespace MrCMS.Web.Apps.References.Services
         {
             var query = _session.QueryOver<Reference>()
                                .Where(a => a.ReferenceList == page);
+
+            if(string.IsNullOrEmpty(model.SearchText) == false)
+            {
+                query = query.Where(r => r.Title.IsInsensitiveLike(model.SearchText, MatchMode.Anywhere) || r.Subject.IsInsensitiveLike(model.SearchText, MatchMode.Anywhere));
+            }
 
             return query.OrderBy(x => x.Date).Desc.Paged(model.Page, page.PageSize);
         }
