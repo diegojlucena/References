@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="s">Buscar</label>
                 <input class="form-control" id="s" name="s" type="text" value="@searchModel.SearchText">
-                
+
             </div>
         </div>
         <div class="col-sm-2">
@@ -30,10 +30,23 @@
 
 @if (pagedList != null && !pagedList.Any())
 {
-    <div class="alert alert-info">@Resource("No references available")</div>
+    if (string.IsNullOrEmpty(searchModel.SearchText))
+    {
+        <div class="alert alert-info">@Resource("No references available")</div>
+    }
+    else
+    {
+        <div class="alert alert-info">@Resource("No references available with term") "@searchModel.SearchText".</div>
+        <p><a href="/@Model.LiveUrlSegment">@Resource("Show all")</a></p>
+    }
 }
-@if (pagedList != null)
+
+@if (pagedList != null && pagedList.Any())
 {
+    if (!string.IsNullOrEmpty(searchModel.SearchText))
+    {
+        <p>Há @pagedList.TotalItemCount itens encontrados com o termo "@searchModel.SearchText"</p>
+    }
     <table class="table table-hover table-striped">
         <thead>
             <tr>
